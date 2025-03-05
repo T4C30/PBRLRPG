@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Juego de Combate por Turnos</title>
+    <link rel="stylesheet" href="CSS.css">
+</head>
+<body> 
+    <div id="game-container">
+        <!-- Página de Inicio -->
+        <div id="start-screen" class="screen active">
+            <h1>Juego de Combate por Turnos</h1>
+            <div class="menu-buttons">
+                <button id="continue-game">Continuar Partida</button>
+                <button id="new-game">Nueva Partida</button>
+                <button id="delete-data">Eliminar Datos</button>
+            </div>
+        </div>
+
+        <!-- Creador de Personajes -->
+        <div id="character-creator" class="screen">
+            <h2>Crear Personaje</h2>
+            <form id="character-form">
+                <input type="text" id="character-name" placeholder="Nombre del personaje" required>
+                <div class="stat-distribution">
+                    <label>Fuerza:
+                        <input type="number" id="strength" min="1" max="10" value="5">
+                    </label>
+                    <label>Defensa:
+                        <input type="number" id="defense" min="1" max="10" value="5">
+                    </label>
+                    <label>Velocidad:
+                        <input type="number" id="speed" min="1" max="10" value="5">
+                    </label>
+                </div>
+                <button type="submit">Crear Personaje</button>
+            </form>
+        </div>
+
+        <!-- Lobby -->
+        <div id="lobby" class="screen">
+            <h2 id="player-name"></h2>
+            <div class="player-stats">
+                <p>Nivel: <span id="player-level">1</span></p>
+                <p>Dinero: <span id="player-money">0</span></p>
+            </div>
+            <div class="lobby-actions">
+                <button id="go-to-shop">Ir a la Tienda</button>
+                <button id="manage-inventory">Inventario</button>
+                <button id="start-battle">Iniciar Combate</button>
+            </div>
+        </div>
+
+        <!-- Tienda -->
+        <div id="shop" class="screen">
+            <h2>Tienda de Armas</h2>
+            <div id="weapon-list"></div>
+            <button id="return-to-lobby">Volver al Lobby</button>
+        </div>
+
+        <!-- Inventario -->
+        <div id="inventory" class="screen">
+            <h2>Inventario</h2>
+            <div id="weapon-inventory"></div>
+            <button id="return-from-inventory">Volver al Lobby</button>
+        </div>
+
+        <!-- Campo de Batalla -->
+        <div id="battle-screen" class="screen">
+            <div class="battle-info">
+                <div class="player-battle-stats">
+                    <h3 id="player-battle-name"></h3>
+                    <div class="hp-bar">
+                        <div id="player-hp-current"></div>
+                    </div>
+                </div>
+                <div class="enemy-battle-stats">
+                    <h3 id="enemy-name"></h3>
+                    <div class="hp-bar">
+                        <div id="enemy-hp-current"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="battle-actions">
+                <button id="attack-btn">Atacar</button>
+                <button id="defend-btn">Defender</button>
+                <button id="flee-btn">Huir</button>
+            </div>
+            <div id="battle-log"></div>
+        </div>
+    </div>
+
+    <script type="module" src="JAVASCRIPT.js"></script>
+</body>
+</html>

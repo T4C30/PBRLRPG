@@ -1,0 +1,76 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+#game-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 80%;
+    max-width: 600px;
+    padding: 20px;
+}
+
+.screen {
+    display: none;
+}
+
+.screen.active {
+    display: block;
+}
+
+button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.stat-distribution {
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+
+.hp-bar {
+    width: 100%;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    height: 20px;
+}
+
+#player-hp-current, #enemy-hp-current {
+    height: 100%;
+    background-color: green;
+    border-radius: 5px;
+    width: 100%;
+}
+
+.battle-actions {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+#battle-log {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+    height: 100px;
+    overflow-y: auto;
+}
