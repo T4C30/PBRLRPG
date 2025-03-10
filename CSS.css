@@ -1,76 +1,234 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #272b30;
     margin: 0;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
+    color: #e9e9e9;
 }
 
 #game-container {
-    background-color: white;
+    background-color: #1a1d21;
     border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    width: 80%;
-    max-width: 600px;
-    padding: 20px;
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 800px;
+    padding: 25px;
+}
+
+h1, h2, h3 {
+    color: #54c8ff;
+    text-align: center;
+    margin-bottom: 20px;
 }
 
 .screen {
     display: none;
+    padding: 15px;
 }
 
 .screen.active {
     display: block;
+    animation: fadeIn 0.5s;
 }
 
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Botones */
 button {
-    background-color: #4CAF50;
+    background-color: #3a7fd5;
     border: none;
     color: white;
-    padding: 10px 20px;
+    padding: 12px 25px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    margin: 10px 2px;
+    margin: 10px 5px;
     cursor: pointer;
     border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #2a65b3;
+}
+
+button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+.menu-buttons {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+}
+
+/* Formulario de creación de personaje */
+#character-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+#character-name {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: #fff;
 }
 
 .stat-distribution {
     display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.stat-distribution label {
+    display: flex;
     justify-content: space-between;
-    margin: 20px 0;
+    align-items: center;
+}
+
+.stat-distribution input {
+    width: 60px;
+    padding: 5px;
+    text-align: center;
+    border-radius: 5px;
+    border: 1px solid #444;
+    background-color: #333;
+    color: #fff;
+}
+
+/* Lobby */
+.player-stats {
+    background-color: #2a2e33;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.lobby-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Tienda e Inventario */
+.weapon-item, .inventory-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px;
+    background-color: #2a2e33;
+    margin-bottom: 10px;
+    border-radius: 8px;
+}
+
+.equipped-weapon {
+    background-color: #2d4263;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Campo de batalla */
+.battle-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.player-battle-stats, .enemy-battle-stats {
+    width: 45%;
+    background-color: #2a2e33;
+    padding: 15px;
+    border-radius: 8px;
 }
 
 .hp-bar {
     width: 100%;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    height: 20px;
+    background-color: #444;
+    border-radius: 20px;
+    height: 25px;
+    overflow: hidden;
+    margin-top: 10px;
+    position: relative;
 }
 
 #player-hp-current, #enemy-hp-current {
     height: 100%;
-    background-color: green;
-    border-radius: 5px;
-    width: 100%;
+    background-color: #4caf50;
+    border-radius: 20px;
+    text-align: center;
+    line-height: 25px;
+    transition: width 0.3s, background-color 0.3s;
+    color: white;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.5);
 }
 
 .battle-actions {
     display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
+    justify-content: center;
+    gap: 15px;
+    margin: 25px 0;
+}
+
+#attack-btn {
+    background-color: #d9534f;
+}
+
+#attack-btn:hover {
+    background-color: #c9302c;
+}
+
+#defend-btn {
+    background-color: #5bc0de;
+}
+
+#defend-btn:hover {
+    background-color: #31b0d5;
+}
+
+#flee-btn {
+    background-color: #f0ad4e;
+}
+
+#flee-btn:hover {
+    background-color: #ec971f;
 }
 
 #battle-log {
     margin-top: 20px;
-    padding: 10px;
-    background-color: #f0f0f0;
-    border-radius: 5px;
-    height: 100px;
+    padding: 15px;
+    background-color: #2a2e33;
+    border-radius: 8px;
+    height: 150px;
     overflow-y: auto;
+    font-family: monospace;
+    line-height: 1.5;
+}
+
+#battle-log p {
+    margin: 5px 0;
+}
+
+/* Efectos de suavizado */
+* {
+    transition: background-color 0.3s, color 0.3s, transform 0.3s;
 }
