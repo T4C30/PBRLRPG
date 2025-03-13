@@ -24,6 +24,12 @@ class Character {
             this.inventory.removeWeapon(weapon);
             return true;
         }
+
+        if (!this.player.equippedWeapon) {
+            console.log("El personaje no tiene arma equipada!");
+            return false;
+        }
+        
         return false;
     }
 
@@ -62,10 +68,16 @@ class Enemy {
         this.currentHP = this.maxHP;
     }
 
-    attack(target) {
-        const damage = Math.max(1, this.strength - (target.defense / 2));
-        target.takeDamage(damage);
-        return damage;
+
+    takeDamage(damage) {
+        this.currentHP = Math.max(0, this.currentHP - damage);
+    }
+
+    attack(target) {  // Completa el método ataque si está incompleto
+        const enemyAttackValue = this.strength; 
+        let damageToDeal = Math.max(1, (enemyAttackValue * this.level) / target.defense); 
+        target.takeDamage(damageToDeal);
+        return damageToDeal;
     }
 }
 
