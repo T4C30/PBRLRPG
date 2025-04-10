@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Las Flipantes e Increíbles aventuras</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/Main.css">
+</head>
+<body>
+    <div id="contenedor-juego">
+
+        <section id="pantalla-inicio" class="pantalla activa">
+             <h1 class="text-3xl font-bold mb-6">Las Flipantes e Increíbles aventuras</h1>
+             <p class="mb-6 text-lg">¡Prepárate para la aventura!</p>
+             <div id="opciones-inicio">
+                 <button id="boton-continuar-partida" data-indice-mando="0">Continuar Partida</button>
+                 <button id="boton-nueva-partida" data-indice-mando="1">Nueva Partida</button>
+                 <button id="boton-eliminar-datos" data-indice-mando="2">Eliminar Datos</button>
+                 <button><a href="https://github.com/T4C30/PBRLRPG">Repositorio</a></button>
+             </div>
+              <div id="mensaje-inicio" class="mensaje info mt-4"></div>
+         </section>
+
+         <section id="pantalla-creador" class="pantalla">
+             <h2 class="text-2xl font-bold mb-4">Crea tu Héroe</h2>
+             <form id="formulario-creador">
+                 <div class="mb-4">
+                     <label for="nombre-personaje">Nombre:</label>
+                     <input type="text" id="nombre-personaje" required maxlength="20" data-indice-mando="0">
+                 </div>
+                 <div class="mb-4">
+                     <label>Estadísticas (Puntos restantes: <span id="puntos-estadisticas-restantes">10</span>)</label>
+                     <div class="grid grid-cols-2 gap-4">
+                         <div><label for="stat-fuerza">Fuerza:</label><input type="number" id="stat-fuerza" value="1" min="1" max="10" data-indice-mando="1"></div>
+                         <div><label for="stat-defensa">Defensa:</label><input type="number" id="stat-defensa" value="1" min="1" max="10" data-indice-mando="2"></div>
+                          <div><label for="stat-velocidad">Velocidad:</label><input type="number" id="stat-velocidad" value="1" min="1" max="10" data-indice-mando="3"></div>
+                          <div><label for="stat-suerte">Suerte:</label><input type="number" id="stat-suerte" value="1" min="1" max="10" data-indice-mando="4"></div>
+                     </div>
+                      <p id="error-estadisticas" class="text-red-400 text-sm mt-2" style="display: none;">Has superado el límite de puntos.</p>
+                 </div>
+                 <div class="mb-4">
+                     <label for="arma-inicial">Arma Inicial:</label>
+                     <select id="arma-inicial" data-indice-mando="5"></select>
+                 </div>
+                 <button type="submit" id="boton-crear-personaje" data-indice-mando="6" disabled>Crear Personaje</button>
+                  <button type="button" id="boton-volver-inicio-desde-creador" data-indice-mando="7">Volver al Inicio</button>
+             </form>
+              <div id="mensaje-creador" class="mensaje info mt-4"></div>
+         </section>
+
+         <section id="pantalla-lobby" class="pantalla">
+             <h2 class="text-2xl font-bold mb-4">Lobby Principal</h2>
+             <div id="estado-personaje-lobby" class="mb-6 p-4 bg-gray-700 rounded-lg text-left">
+                 <h3 class="text-lg font-semibold mb-2">Estado del Personaje</h3>
+                 <p><strong>Nombre:</strong> <span id="lobby-nombre"></span></p>
+                 <p><strong>Nivel:</strong> <span id="lobby-nivel"></span></p>
+                 <p><strong>Experiencia:</strong> <span id="lobby-xp"></span>/<span id="lobby-xp-necesaria"></span></p>
+                 <p><strong>Dinero:</strong> <span id="lobby-dinero"></span> monedas</p>
+                 <p><strong>Arma Equipada:</strong> <span id="lobby-arma"></span></p>
+                 <p><strong>Fuerza:</strong> <span id="lobby-fuerza"></span> | <strong>Defensa:</strong> <span id="lobby-defensa"></span> | <strong>Velocidad:</strong> <span id="lobby-velocidad"></span> | <strong>Suerte:</strong> <span id="lobby-suerte"></span></p>
+             </div>
+             <div id="opciones-lobby">
+                 <button id="boton-ir-tienda" data-indice-mando="0">Ir a la Tienda</button>
+                 <button id="boton-gestionar-inventario" data-indice-mando="1">Gestionar Inventario</button>
+                 <button id="boton-entrar-combate" data-indice-mando="2">¡Entrar en Combate!</button>
+                 <button id="boton-guardar-salir" data-indice-mando="3">Guardar y Salir</button>
+             </div>
+              <div id="mensaje-lobby" class="mensaje info mt-4"></div>
+         </section>
+
+         <section id="pantalla-tienda" class="pantalla">
+             <h2 class="text-2xl font-bold mb-4">Tienda de Armas</h2>
+             <p class="mb-4">Tienes <span id="dinero-tienda" class="font-bold text-yellow-400">0</span> monedas.</p>
+             <div id="mensaje-tienda" class="mensaje info"></div>
+             <ul id="lista-armas-tienda" class="lista-objetos"></ul>
+             <button id="boton-volver-lobby-desde-tienda" data-indice-mando="0">Volver al Lobby</button>
+         </section>
+
+         <section id="pantalla-inventario" class="pantalla">
+             <h2 class="text-2xl font-bold mb-4">Inventario</h2>
+             <p class="mb-4">Arma equipada: <span id="arma-equipada-inventario" class="font-semibold">Ninguna</span></p>
+             <p class="mb-4">Capacidad: <span id="objetos-inventario">0</span> / <span id="capacidad-inventario">10</span></p>
+              <div id="mensaje-inventario" class="mensaje info"></div>
+             <ul id="lista-armas-inventario" class="lista-objetos"></ul>
+             <button id="boton-volver-lobby-desde-inventario" data-indice-mando="0">Volver al Lobby</button>
+         </section>
+
+        <section id="pantalla-batalla" class="pantalla">
+            <h2 class="text-2xl font-bold mb-4">¡Combate!</h2>
+            <div class="contenedor-luchadores">
+                <div class="luchador" id="luchador-jugador">
+                    <img id="img-avatar-jugador" src="https://placehold.co/96x96/718096/e2e8f0?text=H%C3%A9roe" alt="Avatar del Jugador" class="avatar-luchador">
+                    <h3 id="nombre-jugador-batalla">Jugador</h3>
+                    <div class="barra-vida-contenedor">
+                        <div id="barra-vida-jugador" class="barra-vida"></div>
+                        <span id="texto-vida-jugador" class="barra-vida-texto">100/100</span>
+                    </div>
+                </div>
+                <div class="luchador" id="luchador-enemigo">
+                     <img id="img-avatar-enemigo" src="https://placehold.co/96x96/a0aec0/1a202c?text=Enemigo" alt="Avatar del Enemigo" class="avatar-luchador">
+                    <h3 id="nombre-enemigo-batalla">Enemigo</h3>
+                    <div class="barra-vida-contenedor">
+                        <div id="barra-vida-enemigo" class="barra-vida"></div>
+                        <span id="texto-vida-enemigo" class="barra-vida-texto">80/80</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="opciones-batalla" class="mt-4">
+                <button id="boton-atacar" data-indice-mando="0">Atacar</button>
+                <button id="boton-defender" data-indice-mando="1">Defender</button>
+                <button id="boton-huir" data-indice-mando="2">Huir</button>
+            </div>
+
+            <div id="log-batalla" class="mt-4">
+                <p>Comienza la batalla...</p>
+            </div>
+
+            <div id="resultado-batalla" class="mt-4">
+                <h3 id="mensaje-resultado" class="text-xl font-bold"></h3>
+                <p id="recompensas-batalla"></p>
+                <button id="boton-continuar-despues-batalla" data-indice-mando="0">Continuar</button>
+            </div>
+        </section>
+
+         <div id="estado-mando">Esperando conexión de mando...</div>
+
+    </div> <script type="module" src="./JAVASCRIPT/Main.mjs"></script>
+</body>
+</html>
