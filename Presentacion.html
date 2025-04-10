@@ -169,22 +169,22 @@
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-paginate="true" data-theme="default" lang="es-ES" data-marpit-pagination="13" style="--paginate:true;--theme:default;" data-marpit-pagination-total="25" data-size="16:9">
 <p>JavaScript</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-javascript"><span class="hljs-comment">// Mando.mjs - Dentro de pollGamepad</span>
-<span class="hljs-keyword">const</span> ejeY = estadoMandoActual.<span class="hljs-property">axes</span>[<span class="hljs-number">1</span>] ?? <span class="hljs-number">0</span>; <span class="hljs-comment">//</span>
-<span class="hljs-keyword">const</span> dpadArriba = estadoMandoActual.<span class="hljs-property">buttons</span>[<span class="hljs-number">12</span>]?.<span class="hljs-property">pressed</span>; <span class="hljs-comment">//</span>
-<span class="hljs-keyword">const</span> dpadAbajo = estadoMandoActual.<span class="hljs-property">buttons</span>[<span class="hljs-number">13</span>]?.<span class="hljs-property">pressed</span>; <span class="hljs-comment">//</span>
+<span class="hljs-keyword">const</span> ejeY = estadoMandoActual.<span class="hljs-property">axes</span>[<span class="hljs-number">1</span>] ?? <span class="hljs-number">0</span>; 
+<span class="hljs-keyword">const</span> dpadArriba = estadoMandoActual.<span class="hljs-property">buttons</span>[<span class="hljs-number">12</span>]?.<span class="hljs-property">pressed</span>; 
+<span class="hljs-keyword">const</span> dpadAbajo = estadoMandoActual.<span class="hljs-property">buttons</span>[<span class="hljs-number">13</span>]?.<span class="hljs-property">pressed</span>; 
 
-<span class="hljs-keyword">if</span> (ahora  tiempoUltimoMovimientoEje + <span class="hljs-variable constant_">RETRASO_ENTRE_MOVIMIENTOS</span>) { <span class="hljs-comment">//</span>
-    <span class="hljs-keyword">if</span> (ejeY &amp;lt; -<span class="hljs-variable constant_">UMBRAL_EJE</span> || dpadArriba) <span class="hljs-title function_">navegarMando</span>(-<span class="hljs-number">1</span>); <span class="hljs-comment">// Arriba</span>
-    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ejeY  <span class="hljs-variable constant_">UMBRAL_EJE</span> || dpadAbajo) <span class="hljs-title function_">navegarMando</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// Abajo</span>
-    tiempoUltimoMovimientoEje = ahora; <span class="hljs-comment">//</span>
+<span class="hljs-keyword">if</span> (ahora &gt; tiempoUltimoMovimientoEje + <span class="hljs-variable constant_">RETRASO_ENTRE_MOVIMIENTOS</span>) { 
+    <span class="hljs-keyword">if</span> (ejeY &lt; -<span class="hljs-variable constant_">UMBRAL_EJE</span> || dpadArriba) <span class="hljs-title function_">navegarMando</span>(-<span class="hljs-number">1</span>); <span class="hljs-comment">// Arriba</span>
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (ejeY &gt; <span class="hljs-variable constant_">UMBRAL_EJE</span> || dpadAbajo) <span class="hljs-title function_">navegarMando</span>(<span class="hljs-number">1</span>); <span class="hljs-comment">// Abajo</span>
+    tiempoUltimoMovimientoEje = ahora; 
 }
 
-estadoMandoActual.<span class="hljs-property">buttons</span>.<span class="hljs-title function_">forEach</span>((boton, indice) = { <span class="hljs-comment">//</span>
-    <span class="hljs-keyword">if</span> (boton.<span class="hljs-property">pressed</span> &amp;amp;&amp;amp; !botonesAnteriores[indice]) { <span class="hljs-comment">// Flanco de subida</span>
-        <span class="hljs-title function_">manejarPulsacionBotonMando</span>(indice); <span class="hljs-comment">//</span>
+estadoMandoActual.<span class="hljs-property">buttons</span>.<span class="hljs-title function_">forEach</span>(<span class="hljs-function">(<span class="hljs-params">boton, indice</span>) =&gt;</span> { 
+    <span class="hljs-keyword">if</span> (boton.<span class="hljs-property">pressed</span> &amp;&amp; !botonesAnteriores[indice]) { <span class="hljs-comment">// Flanco de subida</span>
+        <span class="hljs-title function_">manejarPulsacionBotonMando</span>(indice); 
     }
 });
-botonesAnteriores = estadoMandoActual.<span class="hljs-property">buttons</span>.<span class="hljs-title function_">map</span>(b = b.<span class="hljs-property">pressed</span>); <span class="hljs-comment">//</span>
+botonesAnteriores = estadoMandoActual.<span class="hljs-property">buttons</span>.<span class="hljs-title function_">map</span>(<span class="hljs-function"><span class="hljs-params">b</span> =&gt;</span> b.<span class="hljs-property">pressed</span>); 
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-marpit-fragments="6" data-paginate="true" data-theme="default" lang="es-ES" data-marpit-pagination="14" style="--paginate:true;--theme:default;" data-marpit-pagination-total="25" data-size="16:9">
@@ -262,18 +262,18 @@ botonesAnteriores = estadoMandoActual.<span class="hljs-property">buttons</span>
 <p>JavaScript</p>
 <pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-javascript"><span class="hljs-comment">// Mando.mjs</span>
 <span class="hljs-keyword">function</span> <span class="hljs-title function_">manejarPulsacionBotonMando</span>(<span class="hljs-params">indiceBoton</span>) {
-    <span class="hljs-keyword">const</span> elementoActivo = <span class="hljs-title function_">getElementosNavegables</span>()[<span class="hljs-title function_">getIndiceElementoSeleccionado</span>()]; 
+    <span class="hljs-keyword">const</span> elementoActivo = <span class="hljs-title function_">getElementosNavegables</span>()[<span class="hljs-title function_">getIndiceElementoSeleccionado</span>()]; <span class="hljs-comment">//</span>
 
-    <span class="hljs-keyword">if</span> (indiceBoton === <span class="hljs-number">0</span> &amp;amp;&amp;amp; elementoActivo) { <span class="hljs-comment">// Botón A/X</span>
-        &lt;span class=&quot;hljs-built_in&quot;&gt;console.log(`Mando: Activando &lt;span class=&quot;hljs-subst&quot;&gt;${elementoActivo.id || elementoActivo.tagName}`); //
-        elementoActivo.click(); // &amp;lt;-- Simula el click
+    <span class="hljs-keyword">if</span> (indiceBoton === <span class="hljs-number">0</span> &amp;&amp; elementoActivo) { <span class="hljs-comment">// Botón A/X</span>
+        <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(<span class="hljs-string">`Mando: Activando <span class="hljs-subst">${elementoActivo.id || elementoActivo.tagName}</span>`</span>); <span class="hljs-comment">//</span>
+        elementoActivo.<span class="hljs-title function_">click</span>(); <span class="hljs-comment">// &lt;-- Simula el click</span>
     }
-    else if (indiceBoton === 1) { // Botón B/O
-        const botonVolver = pantallaActiva.querySelector(/* Selectores de botones volver */); 
-        if (botonVolver) { 
-            botonVolver.click(); 
+    <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (indiceBoton === <span class="hljs-number">1</span>) { <span class="hljs-comment">// Botón B/O</span>
+        <span class="hljs-keyword">const</span> botonVolver = pantallaActiva.<span class="hljs-title function_">querySelector</span>(<span class="hljs-comment">/* Selectores de botones volver */</span>); <span class="hljs-comment">//</span>
+        <span class="hljs-keyword">if</span> (botonVolver) { <span class="hljs-comment">//</span>
+            botonVolver.<span class="hljs-title function_">click</span>(); <span class="hljs-comment">//</span>
         }
-        // ... más lógica ...
+        <span class="hljs-comment">// ... más lógica ...</span>
     }
 }
 </code></pre>

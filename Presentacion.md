@@ -133,22 +133,22 @@ JavaScript
 
 ```javascript
 // Mando.mjs - Dentro de pollGamepad
-const ejeY = estadoMandoActual.axes[1] ?? 0; //
-const dpadArriba = estadoMandoActual.buttons[12]?.pressed; //
-const dpadAbajo = estadoMandoActual.buttons[13]?.pressed; //
+const ejeY = estadoMandoActual.axes[1] ?? 0; 
+const dpadArriba = estadoMandoActual.buttons[12]?.pressed; 
+const dpadAbajo = estadoMandoActual.buttons[13]?.pressed; 
 
-if (ahora  tiempoUltimoMovimientoEje + RETRASO_ENTRE_MOVIMIENTOS) { //
-    if (ejeY &lt; -UMBRAL_EJE || dpadArriba) navegarMando(-1); // Arriba
-    else if (ejeY  UMBRAL_EJE || dpadAbajo) navegarMando(1); // Abajo
-    tiempoUltimoMovimientoEje = ahora; //
+if (ahora > tiempoUltimoMovimientoEje + RETRASO_ENTRE_MOVIMIENTOS) { 
+    if (ejeY < -UMBRAL_EJE || dpadArriba) navegarMando(-1); // Arriba
+    else if (ejeY > UMBRAL_EJE || dpadAbajo) navegarMando(1); // Abajo
+    tiempoUltimoMovimientoEje = ahora; 
 }
 
-estadoMandoActual.buttons.forEach((boton, indice) = { //
-    if (boton.pressed &amp;&amp; !botonesAnteriores[indice]) { // Flanco de subida
-        manejarPulsacionBotonMando(indice); //
+estadoMandoActual.buttons.forEach((boton, indice) => { 
+    if (boton.pressed && !botonesAnteriores[indice]) { // Flanco de subida
+        manejarPulsacionBotonMando(indice); 
     }
 });
-botonesAnteriores = estadoMandoActual.buttons.map(b = b.pressed); //
+botonesAnteriores = estadoMandoActual.buttons.map(b => b.pressed); 
 ```
 
 ---
@@ -211,16 +211,16 @@ JavaScript
 ```javascript
 // Mando.mjs
 function manejarPulsacionBotonMando(indiceBoton) {
-    const elementoActivo = getElementosNavegables()[getIndiceElementoSeleccionado()]; 
+    const elementoActivo = getElementosNavegables()[getIndiceElementoSeleccionado()]; //
 
-    if (indiceBoton === 0 &amp;&amp; elementoActivo) { // Botón A/X
-        <span class="hljs-built_in">console.log(`Mando: Activando <span class="hljs-subst">${elementoActivo.id || elementoActivo.tagName}`); //
-        elementoActivo.click(); // &lt;-- Simula el click
+    if (indiceBoton === 0 && elementoActivo) { // Botón A/X
+        console.log(`Mando: Activando ${elementoActivo.id || elementoActivo.tagName}`); //
+        elementoActivo.click(); // <-- Simula el click
     }
     else if (indiceBoton === 1) { // Botón B/O
-        const botonVolver = pantallaActiva.querySelector(/* Selectores de botones volver */); 
-        if (botonVolver) { 
-            botonVolver.click(); 
+        const botonVolver = pantallaActiva.querySelector(/* Selectores de botones volver */); //
+        if (botonVolver) { //
+            botonVolver.click(); //
         }
         // ... más lógica ...
     }
